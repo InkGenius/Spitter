@@ -16,23 +16,22 @@ import com.habuma.spitter.domain.Spittle;
 import com.habuma.spitter.persistence.SpitterDao;
 
 @Service("spitterService")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional
 public class SpitterServiceImpl implements SpitterService {
-
   public void saveSpittle(Spittle spittle) {
     spittle.setWhen(new Date());
     spitterDao.saveSpittle(spittle);
   }
 
-  @Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
   public List<Spittle> getRecentSpittles(int count) {
     List<Spittle> recentSpittles = 
         spitterDao.getRecentSpittle();
     
-    reverse(recentSpittles);
+    //reverse(recentSpittles);
     
-    return recentSpittles.subList(0, 
-            min(49, recentSpittles.size()));
+//    return recentSpittles.subList(0, 
+//            min(49, recentSpittles.size()));
+    return recentSpittles;
   }
   
   public void saveSpitter(Spitter spitter) {

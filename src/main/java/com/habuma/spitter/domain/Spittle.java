@@ -33,7 +33,7 @@ public class Spittle implements Serializable {
   private Date when;
 
   public Spittle() {
-    this.spitter = new Spitter();  // HARD-CODED FOR NOW
+    this.spitter = new Spitter();
     this.spitter.setId((long)1);
   }
   
@@ -77,7 +77,6 @@ public class Spittle implements Serializable {
     this.spitter = spitter;
   }
   
-  // plumbing
   @Override
   public boolean equals(Object obj) {
     return reflectionEquals(this, obj);

@@ -60,7 +60,10 @@ public class SpitterDaoImpl implements SpitterDao {
     return (Spittle) currentSession().get(Spittle.class, id);
   }
   
+  @SuppressWarnings("unchecked")
   public List<Spitter> findAllSpitters() {
-    return null;
+	 String hql = "from Spitter";
+      List<Spitter> consumes = currentSession().createQuery(hql).list();
+	  return consumes;
   }
 }

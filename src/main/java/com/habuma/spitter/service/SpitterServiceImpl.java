@@ -29,8 +29,8 @@ public class SpitterServiceImpl implements SpitterService {
     
     //reverse(recentSpittles);
     
-//    return recentSpittles.subList(0, 
-//            min(49, recentSpittles.size()));
+    //return recentSpittles.subList(0, 
+    //min(49, recentSpittles.size()));
     return recentSpittles;
   }
   

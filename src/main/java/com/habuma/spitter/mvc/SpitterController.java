@@ -1,12 +1,8 @@
 package com.habuma.spitter.mvc;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.jets3t.service.S3Service;
 //import org.jets3t.service.acl.AccessControlList;
@@ -16,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.jets3t.service.model.S3Bucket;
 //import org.jets3t.service.model.S3Object;
 //import org.jets3t.service.security.AWSCredentials;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,7 +74,6 @@ public class SpitterController {
 	
 	 return "redirect:/spitters/" + spitter.getUsername();
 	 }
-	// <end id="method_addSpitterFromForm"/>
 
 	// private void saveImage(String filename, MultipartFile image)
 	// throws ImageUploadException {

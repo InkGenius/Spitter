@@ -34,30 +34,30 @@ import com.habuma.spitter.service.SpitterService;
 public class SpitterController {
 	
 	private final SpitterService spitterService;
-
+	
 	@Autowired
 	public SpitterController(SpitterService spitterService) {
 		this.spitterService = spitterService;
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String listSpitters(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "perPage", defaultValue = "10") int perPage, Map<String, Object> model) {
 		model.put("spitters", spitterService.getAllSpitters());
 		return "spitters/list";
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET, params = "new")
 	public String createSpitterProfile(Model model) {
 		model.addAttribute(new Spitter());
 		return "spitters/edit";
 	}
+	
 	 @RequestMapping(method=RequestMethod.POST)
 	 public String addSpitterFromForm(@Valid Spitter spitter,BindingResult bindingResult,
 			 @RequestParam(value="image", required=false) MultipartFile image) {
-	
 	 if(bindingResult.hasErrors()) {
-	 return "spitters/edit";
+		 return "spitters/edit";
 	 }
 	
 	 spitterService.saveSpitter(spitter);
@@ -108,20 +108,18 @@ public class SpitterController {
 	// }
 	// }
 	//
-	// <start id="method_showSpitterProfile"/>
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
 	public String showSpitterProfile(@PathVariable String username, Model model) {
 		model.addAttribute(spitterService.getSpitter(username));
 		return "spitters/view";
 	}
-	// <end id="method_showSpitterProfile"/>
 
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET, params = "edit")
 	public String editSpitterProfile(@PathVariable String username, Model model) {
 		model.addAttribute(spitterService.getSpitter(username));
 		return "spitters/edit";
 	}
-
+	
 	@RequestMapping(value = "/{username}", method = RequestMethod.PUT)
 	public String updateSpitterFromForm(@PathVariable String username, Spitter spitter) {
 		spitterService.saveSpitter(spitter);
@@ -157,13 +155,11 @@ public class SpitterController {
 		return spitter;
 	}
 
-	// <start id="method_getSpitter_ResponseBody"/>
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET, headers = {
 			"Accept=text/xml, application/json" })
 	public @ResponseBody Spitter getSpitter(@PathVariable String username) {
 		return spitterService.getSpitter(username);
 	}
-	// <end id="method_getSpitter_ResponseBody"/>
 
 	// @RequestMapping(value = "/{username}", method = RequestMethod.GET,
 	// headers = "Accept=application/json")
@@ -172,16 +168,18 @@ public class SpitterController {
 	// return spitterService.getSpitter(username);
 	// }
 
-	// <start id="method_putSpitter"/>
 	@RequestMapping(value = "/{username}", method = RequestMethod.PUT, headers = "Content-Type=application/json")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateSpitter(@PathVariable String username, @RequestBody Spitter spitter) {
 		spitterService.saveSpitter(spitter);
 	}
-	// <end id="method_putSpitter"/>
-
+	
 	@RequestMapping(value = "/{username}/spittles", method = RequestMethod.GET, headers = "Accept=application/json")
 	public @ResponseBody List<Spittle> getSpittlesForSpitter(@PathVariable String username) {
 		return spitterService.getSpittlesForSpitter(username);
 	}
 }
+
+
+
+

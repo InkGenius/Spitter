@@ -3,11 +3,10 @@
 
 <div>
 	<h2>Create a free Spitter account</h2>
-	
+
 	<s:url value="/spitter" var="spitterform_url" />
-	
-	<sf:form method="POST" action="${spitterform_url}"
-		modelAttribute="spitter"> 
+
+	<sf:form method="POST" action="${spitterform_url}" modelAttribute="spitter"> 
 		
 		Full name: <sf:input path="fullName" size="15" />
 		<br />
@@ -20,6 +19,7 @@
 
 		<sf:checkbox path="updateByEmail" />Send me email updates!<br />
 
-		<input name="commit" type="submit" value="I accept. Create my account." />
+		<input name="commit" type="submit"
+			value="I accept. Create my account." />
 	</sf:form>
 </div>

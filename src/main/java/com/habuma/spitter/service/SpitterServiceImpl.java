@@ -1,8 +1,5 @@
 package com.habuma.spitter.service;
 
-import static java.lang.Math.*;
-import static java.util.Collections.*;
-
 import java.util.Date;
 import java.util.List;
 

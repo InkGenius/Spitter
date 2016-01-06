@@ -32,48 +32,48 @@ import com.habuma.spitter.service.SpitterService;
 @Controller
 @RequestMapping("/spitters")
 public class SpitterController {
-	
+
 	private final SpitterService spitterService;
-	
+
 	@Autowired
 	public SpitterController(SpitterService spitterService) {
 		this.spitterService = spitterService;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String listSpitters(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "perPage", defaultValue = "10") int perPage, Map<String, Object> model) {
 		model.put("spitters", spitterService.getAllSpitters());
 		return "spitters/list";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, params = "new")
 	public String createSpitterProfile(Model model) {
 		model.addAttribute(new Spitter());
 		return "spitters/edit";
 	}
-	
-	 @RequestMapping(method=RequestMethod.POST)
-	 public String addSpitterFromForm(@Valid Spitter spitter,BindingResult bindingResult,
-			 @RequestParam(value="image", required=false) MultipartFile image) {
-	 if(bindingResult.hasErrors()) {
-		 return "spitters/edit";
-	 }
-	
-	 spitterService.saveSpitter(spitter);
-	
-	 try {
-		 if(!image.isEmpty()) {
-	//		 validateImage(image);
-	//		 saveImage(spitter.getId() + ".jpg", image);
-		 }
-	 } catch (Exception e) {
-		 bindingResult.reject(e.getMessage());
-		 return "spitters/edit";
-	 }
-	
-	 return "redirect:/spitters/" + spitter.getUsername();
-	 }
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String addSpitterFromForm(@Valid Spitter spitter, BindingResult bindingResult,
+			@RequestParam(value = "image", required = false) MultipartFile image) {
+		if (bindingResult.hasErrors()) {
+			return "spitters/edit";
+		}
+
+		spitterService.saveSpitter(spitter);
+
+		try {
+			if (!image.isEmpty()) {
+				// validateImage(image);
+				// saveImage(spitter.getId() + ".jpg", image);
+			}
+		} catch (Exception e) {
+			bindingResult.reject(e.getMessage());
+			return "spitters/edit";
+		}
+
+		return "redirect:/spitters/" + spitter.getUsername();
+	}
 
 	// private void saveImage(String filename, MultipartFile image)
 	// throws ImageUploadException {
@@ -119,7 +119,7 @@ public class SpitterController {
 		model.addAttribute(spitterService.getSpitter(username));
 		return "spitters/edit";
 	}
-	
+
 	@RequestMapping(value = "/{username}", method = RequestMethod.PUT)
 	public String updateSpitterFromForm(@PathVariable String username, Spitter spitter) {
 		spitterService.saveSpitter(spitter);
@@ -167,19 +167,15 @@ public class SpitterController {
 	// Spitter getSpitterAsXML(@PathVariable String username) {
 	// return spitterService.getSpitter(username);
 	// }
-
+	
 	@RequestMapping(value = "/{username}", method = RequestMethod.PUT, headers = "Content-Type=application/json")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateSpitter(@PathVariable String username, @RequestBody Spitter spitter) {
 		spitterService.saveSpitter(spitter);
 	}
-	
+
 	@RequestMapping(value = "/{username}/spittles", method = RequestMethod.GET, headers = "Accept=application/json")
 	public @ResponseBody List<Spittle> getSpittlesForSpitter(@PathVariable String username) {
 		return spitterService.getSpittlesForSpitter(username);
 	}
 }
-
-
-
-

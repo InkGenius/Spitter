@@ -28,9 +28,9 @@ public class HomeControllerTest {
                    new HomeController(spitterService); //<co id="co_createController"/>
     
     HashMap<String, Object> model = new HashMap<String, Object>();
-    String viewName = controller.showHomePage(model); //<co id="co_callShowHomePage"/>
-    
-    assertEquals("home", viewName);
+//    String viewName = controller.showHomePage(model); //<co id="co_callShowHomePage"/>
+//    
+//    assertEquals("home", viewName);
 
     assertSame(expectedSpittles, model.get("spittles")); //<co id="co_assertResults"/>
     verify(spitterService).getRecentSpittles(DEFAULT_SPITTLES_PER_PAGE);

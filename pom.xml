@@ -8,10 +8,9 @@
 	<name>spiter-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.7</java-version>
 		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
-		<org.springframework.security.version>3.2.3.RELEASE</org.springframework.security.version>
-		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
+		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
@@ -67,7 +66,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>${springsecurity.version}</version>
         </dependency>
-        
+        <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -221,7 +224,32 @@
 		</dependency>
 		
 	</dependencies>
+
 	<build>
 		<finalName>spiter-web</finalName>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+
+		</plugins>
 	</build>
 </project>
